@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Customizable coffee-to-water ratio calculator to determine the perfect coffee brewing proportions.">
+    <title>Coffee-to-Water Ratio Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007BFF;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coffee Ratio Calculator</h1>
+        <p>Enter coffee (grams) or water (ml), and specify a custom coffee-to-water ratio if desired.</p>
+        <input type="number" id="coffeeInput" placeholder="Coffee (grams)">
+        <input type="number" id="waterInput" placeholder="Water (ml)">
+        <input type="number" id="ratioInput" placeholder="Ratio (default: 16.67)" step="0.01">
+        <button onclick="calculate()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const defaultRatio = 16.67;
+            const coffeeInput = document.getElementById('coffeeInput').value;
+            const waterInput = document.getElementById('waterInput').value;
+            const ratioInput = document.getElementById('ratioInput').value || defaultRatio;
+            const result = document.getElementById('result');
+
+            if (coffeeInput && !waterInput) {
+                const water = (coffeeInput * ratioInput).toFixed(2);
+                result.textContent = `For ${coffeeInput} grams of coffee, you need ${water} ml of water using a ${ratioInput}:1 ratio.`;
+            } else if (waterInput && !coffeeInput) {
+                const coffee = (waterInput / ratioInput).toFixed(2);
+                result.textContent = `For ${waterInput} ml of water, you need ${coffee} grams of coffee using a ${ratioInput}:1 ratio.`;
+            } else {
+                result.textContent = "Please fill in either coffee or water, not both!";
+            }
+        }
+    </script>
+</body>
+</html>
